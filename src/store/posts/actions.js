@@ -24,20 +24,20 @@
 
 import axios from "axios";
 
-export function thunkExample() {
-  return async function(dispatch, getState) {
-    const reduxState = getState();
-    console.log("WHAT IS IN THE STATE", reduxState);
-    if (reduxState.posts.length === 0) {
-      dispatch({ type: "I_AM_LOADING" });
-      dispatch({ type: "SOMETHING HAPPENED" });
-      dispatch({ type: "SOMETHING ELSE" });
-      dispatch({ type: "I_AM_DONE" });
-    } else {
-      dispatch({ type: "WE_ALREADY_HAVE_WHAT_WE_NEED" });
-    }
-  };
-}
+// export function thunkExample() {
+//   return async function(dispatch, getState) {
+//     const reduxState = getState();
+//     console.log("WHAT IS IN THE STATE", reduxState);
+//     if (reduxState.posts.length === 0) {
+//       dispatch({ type: "I_AM_LOADING" });
+//       dispatch({ type: "SOMETHING HAPPENED" });
+//       dispatch({ type: "SOMETHING ELSE" });
+//       dispatch({ type: "I_AM_DONE" });
+//     } else {
+//       dispatch({ type: "WE_ALREADY_HAVE_WHAT_WE_NEED" });
+//     }
+//   };
+// }
 
 function fetchPostsSucces(data) {
   return { type: "FETCHED_POSTS_SUCCESS", payload: data };

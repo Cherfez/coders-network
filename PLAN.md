@@ -61,5 +61,24 @@
 - Use Selector
 - Render the data
 
+# Developer list page
+
+- X Create a component
+- X Route to the component
+  - X Switch
+  - X Route -> DeveloperList
+  - X Navbar
+  - X Navlink
+- X Navigate to the developers page
+- X Gather data (from where?)
+- X Make a request to the api for data
+  - X useEffect
+- X Action creator (async, a.k.a. a thunk)
+- x Dispatch action
+- X Handle action in the reducer
+- X Selector
+- X Use Selector
+- X Render the data
+
 - Later
   - Show the user our app is loading (spinner)
