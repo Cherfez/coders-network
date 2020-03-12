@@ -4,11 +4,12 @@ import { fetchPostsThunk } from "../../store/posts/actions";
 import { selectPosts } from "../../store/posts/selectors";
 import Post from "../../components/Post";
 import Container from "react-bootstrap/Container";
+import Button from "react-bootstrap/Button";
 
 export default function PostsList() {
   const dispatch = useDispatch();
   const posts = useSelector(selectPosts);
-  console.log(posts);
+  //console.log(posts);
 
   useEffect(
     function() {
@@ -29,12 +30,17 @@ export default function PostsList() {
     [dispatch]
   );
 
+  function handleClick() {
+    dispatch(fetchPostsThunk());
+  }
+
   return (
     <Container>
       {posts.map(post => {
-        console.log(post);
-        return <Post title={post.title} key={post.id} />;
+        //console.log(post);
+        return <Post title={post.title} key={post.id} id={post.id} />;
       })}
+      <Button onClick={handleClick}>I want to read more posts</Button>
     </Container>
   );
 }

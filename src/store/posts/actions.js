@@ -45,12 +45,46 @@ function fetchPostsSucces(data) {
 
 export function fetchPostsThunk() {
   return async function(dispatch, getState) {
+    const reduxState = getState();
+    const limit = 3;
+    const postCount = reduxState.posts.rows.length;
+
+    //console.log(reduxState.posts.rows.length, reduxState.posts.count);
+
     const response = await axios.get(
-      "https://codaisseur-coders-network.herokuapp.com/posts"
+      `https://codaisseur-coders-network.herokuapp.com/posts?offset=${postCount}&limit=${limit}`
     );
 
-    console.log(response);
+    //console.log(response);
     const action = fetchPostsSucces(response.data);
+    dispatch(action);
+  };
+}
+
+function fetchPostSuccess(data) {
+  return {
+    type: "FETCH_POST_DETAILS_SUCCESS",
+    payload: data
+  };
+}
+
+export function fetchPostById(postId) {
+  return async function(dispatch, getState) {
+    const [postResponse, commentsReponse] = await Promise.all([
+      axios.get(
+        `https://codaisseur-coders-network.herokuapp.com/posts/${postId}`
+      ),
+      axios.get(
+        `https://codaisseur-coders-network.herokuapp.com/posts/${postId}/comments`
+      )
+    ]);
+
+    // console.log(postResponse, commentsReponse);
+
+    const data = { ...postResponse.data, comments: commentsReponse.data.rows };
+
+    const action = fetchPostSuccess(data);
+    // console.log(action);
     dispatch(action);
   };
 }

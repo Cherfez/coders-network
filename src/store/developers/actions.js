@@ -21,13 +21,19 @@ function fetchDevelopersSucces(data) {
 
 export function fetchDevelopersThunk() {
   return async function(dispatch, getState) {
+    const reduxState = getState();
+    const limit = 1;
+    const developerCount = reduxState.developers.rows.length;
+    //console.log(reduxState.developers.rows.length, reduxState.developers.count);
+
+    // offste and limit, so it only gets what i tell it
     const response = await axios.get(
-      "https://codaisseur-coders-network.herokuapp.com/developers"
+      `https://codaisseur-coders-network.herokuapp.com/developers?offset=${developerCount}&limit=${limit}`
     );
 
-    console.log("here?", response);
+    //console.log("here?", response);
     const action = fetchDevelopersSucces(response.data);
-    console.log("action", action);
+    //console.log("action", action);
     dispatch(action);
   };
 }

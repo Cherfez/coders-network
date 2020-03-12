@@ -4,6 +4,7 @@ import Developers from "../../components/Developers";
 import { useDispatch, useSelector } from "react-redux";
 import { selectDevelopers } from "../../store/developers/selectors";
 import { fetchDevelopersThunk } from "../../store/developers/actions";
+import Button from "react-bootstrap/Button";
 
 export default function DeveloperList() {
   const dispatch = useDispatch();
@@ -17,13 +18,25 @@ export default function DeveloperList() {
     [dispatch]
   );
 
+  function handleClick() {
+    dispatch(fetchDevelopersThunk());
+  }
+
   return (
     <Container>
       <h1>hello?</h1>
       {developers.map(dev => {
         //console.log("dev in map", dev);
-        return <Developers name={dev.name} key={dev.id} />;
+        return (
+          <Developers
+            name={dev.name}
+            github_username={dev.github_username}
+            key={dev.id}
+            id={dev.id}
+          />
+        );
       })}
+      <Button onClick={handleClick}>I want to read more posts</Button>
     </Container>
   );
 }
