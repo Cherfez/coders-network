@@ -24,7 +24,7 @@ export default function DeveloperList() {
 
   return (
     <Container>
-      <h1>hello?</h1>
+      <h1>Our Developers</h1>
       {developers.map(dev => {
         //console.log("dev in map", dev);
         return (
