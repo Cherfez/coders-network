@@ -24,7 +24,6 @@ export default function DeveloperList() {
 
   return (
     <Container>
-      <h1>Our Developers</h1>
       {developers.map(dev => {
         //console.log("dev in map", dev);
         return (
@@ -36,7 +35,14 @@ export default function DeveloperList() {
           />
         );
       })}
-      <Button onClick={handleClick}>I want to read more posts</Button>
+      <Button
+        onClick={handleClick}
+        variant="info"
+        className="d-flex mx-auto mt-2 mb-4"
+        style={{ width: "40%" }}
+      >
+        I want to see more developers
+      </Button>
     </Container>
   );
 }

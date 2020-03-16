@@ -22,7 +22,7 @@ function fetchDevelopersSucces(data) {
 export function fetchDevelopersThunk() {
   return async function(dispatch, getState) {
     const reduxState = getState();
-    const limit = 1;
+    const limit = 5;
     const developerCount = reduxState.developers.rows.length;
     //console.log(reduxState.developers.rows.length, reduxState.developers.count);
 

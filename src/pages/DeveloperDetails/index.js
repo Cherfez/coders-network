@@ -12,7 +12,7 @@ export default function DeveloperDetails() {
   //console.log("id", id);
   const dispatch = useDispatch();
   const developer = useSelector(selectDeveloperDetails);
-  //console.log("developer!!", developer);
+  console.log("developer!!", developer);
 
   useEffect(() => {
     dispatch(fetchDeveloperById(id));

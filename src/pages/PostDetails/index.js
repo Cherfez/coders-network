@@ -17,13 +17,16 @@ export default function PostDetails() {
   //   console.log(params.id);
   const dispatch = useDispatch();
   const postDetails = useSelector(selectPostDetails);
-  //   console.log(postDetails);
+  console.log(postDetails);
 
   useEffect(() => {
     dispatch(fetchPostById(params.id));
   }, [dispatch, params.id]);
 
-  if (!postDetails.title) return <Spinner />;
+  if (!postDetails.title) return <Spinner animation="border" variant="info" />;
+
+  const dateWrittenPost = new Date(postDetails.createdAt);
+  const dateStringPost = dateWrittenPost.toDateString();
 
   return (
     <Container>
@@ -35,15 +38,30 @@ export default function PostDetails() {
             {postDetails.developer.name}
           </Link>
         </h3>
+        <h6 className="text-muted">{dateStringPost}</h6>
       </Jumbotron>
       <ReactMarkdown source={postDetails.content} />
+      <hr />
       <CommentForm />
       {postDetails.comments.map(comment => {
-        // console.log(comment);
+        const date = new Date(comment.createdAt);
+        const dateString = date.toDateString();
+
         return (
-          <Card key={comment.id}>
-            <h5>{comment.developer.name} says:</h5>
-            <p>{comment.text}</p>
+          <Card
+            key={comment.id}
+            style={{ margin: "1rem auto", padding: "1rem" }}
+          >
+            <div className="d-flex justify-content-between bg-light">
+              <h6 className="text-info " style={{ padding: "1rem" }}>
+                {comment.developer.name} says:
+              </h6>{" "}
+              <span className="my-auto text-muted">{dateString}</span>
+            </div>
+
+            <p style={{ fontSize: "1.2rem", padding: "1rem" }}>
+              {comment.text}
+            </p>
           </Card>
         );
       })}

@@ -38,9 +38,23 @@ export default function PostsList() {
     <Container>
       {posts.map(post => {
         //console.log(post);
-        return <Post title={post.title} key={post.id} id={post.id} />;
+        return (
+          <Post
+            title={post.title}
+            key={post.id}
+            id={post.id}
+            tags={post.tags}
+          />
+        );
       })}
-      <Button onClick={handleClick}>I want to read more posts</Button>
+      <Button
+        onClick={handleClick}
+        variant="info"
+        className="d-flex mx-auto mt-2 mb-4"
+        style={{ width: "40%" }}
+      >
+        I want to read more posts
+      </Button>
     </Container>
   );
 }

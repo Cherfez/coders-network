@@ -31,13 +31,15 @@ export default function CommentForm() {
         </Form.Label>
         <Form.Control as="textarea" rows="3" />
       </Form.Group>
-      <Button variant="primary" type="submit">
+      <Button variant="info" type="submit">
         Submit
       </Button>
     </Form>
   ) : (
-    <Link to="/login">
-      <h2>Log in to comment</h2>
+    <Link to="/login" className="text-success ">
+      <h4 className="mx-auto my-2" style={{ width: "20rem" }}>
+        Log in to comment
+      </h4>
     </Link>
   );
 

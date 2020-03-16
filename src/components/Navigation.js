@@ -2,15 +2,16 @@ import React from "react";
 import Navbar from "react-bootstrap/Navbar";
 import Nav from "react-bootstrap/Nav";
 import { NavLink } from "react-router-dom";
-import { selectToken, selectUserEmail } from "../store/user/selectors";
+import { selectToken, selectUserName } from "../store/user/selectors";
 import { useSelector, useDispatch } from "react-redux";
 import { logout } from "../store/user/action";
 import Button from "react-bootstrap/Button";
+import { GiAstronautHelmet } from "react-icons/gi";
 
 export default function Navigation() {
   const token = useSelector(selectToken);
   //console.log("token in nav", token);
-  const email = useSelector(selectUserEmail);
+  const name = useSelector(selectUserName);
   const dispatch = useDispatch();
 
   function handleLogout() {
@@ -18,13 +19,13 @@ export default function Navigation() {
   }
 
   return (
-    <Navbar bg="light" expand="lg">
+    <Navbar bg="dark" variant="dark" expand="md" sticky="top">
       <Navbar.Brand as={NavLink} to="/">
-        React-Bootstrap
+        <GiAstronautHelmet style={{ fontSize: "2rem" }} />
       </Navbar.Brand>
       <Navbar.Toggle aria-controls="basic-navbar-nav" />
       <Navbar.Collapse id="basic-navbar-nav">
-        <Nav className="mr-auto">
+        <Nav style={{ width: "100%" }}>
           <Nav.Link exact as={NavLink} to="/">
             Home
           </Nav.Link>
@@ -34,12 +35,18 @@ export default function Navigation() {
           <Nav.Link as={NavLink} to="/developers">
             Developers
           </Nav.Link>
+
           {token === null ? (
             <Nav.Link as={NavLink} to="/signup">
               SignUp
             </Nav.Link>
           ) : (
-            <p>Welcome, {email}</p>
+            <p
+              style={{ color: "white" }}
+              className="d-inline-flex ml-auto my-auto mr-5"
+            >
+              Welcome, {name}
+            </p>
           )}
 
           {token === null ? (
@@ -47,7 +54,13 @@ export default function Navigation() {
               Login
             </Nav.Link>
           ) : (
-            <Button onClick={handleLogout}>Logout</Button>
+            <Button
+              variant="outline-info"
+              className="d-inline-flex"
+              onClick={handleLogout}
+            >
+              Logout
+            </Button>
           )}
         </Nav>
       </Navbar.Collapse>
